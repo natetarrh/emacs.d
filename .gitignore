@@ -1,0 +1,12 @@
+eln-cache/
+elpa/
+auto-save-list/
+transient/
+projects
+*~
+\#*\#
+.#*
+.custom.el
+.emacs.desktop
+.emacs.desktop.lock
+recentf
