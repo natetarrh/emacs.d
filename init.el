@@ -205,21 +205,26 @@
   :ensure t
   :hook (vterm-mode . (lambda ()
                         (display-line-numbers-mode -1)
+                        (setq-local truncate-lines t)
+                        (setq-local fringe-indicator-alist
+                                    '((truncation nil nil)))
                         (set-window-fringes nil 0 0)
-                        (page-break-lines-mode -1))))
+                        (page-break-lines-mode -1)))
+  :bind (:map vterm-mode-map
+              ("M-:" . eval-expression)))
 
 (use-package claude-code
   :ensure t
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
   :bind-keymap ("C-c c" . claude-code-command-map)
-  :diminish claude-code-mode
+  :diminish
   :config
   (setq claude-code-terminal-backend 'vterm)
   (setq claude-code-display-window-fn
         (lambda (buffer)
-          (pop-to-buffer buffer '((display-buffer-in-direction)
-                                  (direction . right)
-                                  (window-width . 0.5)))))
+          (display-buffer buffer '((display-buffer-in-direction)
+                                   (direction . right)
+                                   (window-width . 0.5)))))
   (claude-code-mode))
 
 ;;; init.el ends here
