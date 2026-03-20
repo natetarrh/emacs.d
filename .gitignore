@@ -1,12 +1,66 @@
+# -*- mode: gitignore; -*-
+
+# Byte-compiled / native-compiled
+*.elc
 eln-cache/
-elpa/
-auto-save-list/
-transient/
-projects
+
+# Backup and auto-save
 *~
 \#*\#
 .#*
-.custom.el
+auto-save-list/
+
+# Desktop
 .emacs.desktop
 .emacs.desktop.lock
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+eshell/history
+eshell/lastdir
+
+# elpa packages
+elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+server/
+
+# projectile
+.projectile
+
+# Directory configuration
+.dir-locals.el
+
+# Network security
+network-security.data
+
+# undo-tree
+*.~undo-tree~
+
+# tramp
+tramp
+
+# Local
+.custom.el
+transient/
+projects
 recentf
