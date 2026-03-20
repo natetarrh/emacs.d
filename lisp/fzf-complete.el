@@ -12,20 +12,42 @@
   :type 'string
   :group 'minibuffer)
 
+(defvar fzf-complete--cache nil
+  "Cache: (CACHE-KEY TABLE . INPUT-STRING).")
+
+(defun fzf-complete--prepare (candidates)
+  "Return (TABLE . INPUT-STRING) for CANDIDATES, caching across calls."
+  (let ((cache-key (cons (length candidates) (car candidates))))
+    (if (and fzf-complete--cache
+             (equal (car fzf-complete--cache) cache-key))
+        (cdr fzf-complete--cache)
+      (let ((table (make-hash-table :test #'equal :size (length candidates)))
+            (input (mapconcat #'substring-no-properties candidates "\n")))
+        (dolist (c candidates)
+          (let ((key (substring-no-properties c)))
+            (unless (gethash key table)
+              (puthash key c table))))
+        (let ((entry (cons table input)))
+          (setq fzf-complete--cache (cons cache-key entry))
+          entry)))))
+
+(defun fzf-complete--clear-cache ()
+  "Clear the candidate cache."
+  (setq fzf-complete--cache nil))
+
+(add-hook 'minibuffer-exit-hook #'fzf-complete--clear-cache)
+
 (defun fzf-complete--filter (pattern candidates)
   "Filter CANDIDATES with fzf --filter using PATTERN.
 Returns a list sorted by fzf's ranking.
 Text properties on CANDIDATES are preserved."
   (if (string-empty-p pattern)
       (copy-sequence candidates)
-    ;; Build a lookup from plain text back to original propertized candidate.
-    (let ((table (make-hash-table :test #'equal :size (length candidates))))
-      (dolist (c candidates)
-        (let ((key (substring-no-properties c)))
-          (unless (gethash key table)
-            (puthash key c table))))
+    (let* ((prepared (fzf-complete--prepare candidates))
+           (table (car prepared))
+           (input (cdr prepared)))
       (with-temp-buffer
-        (insert (mapconcat #'substring-no-properties candidates "\n"))
+        (insert input)
         (let ((exit-code
                (call-process-region (point-min) (point-max)
                                     fzf-complete-executable
