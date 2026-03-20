@@ -110,10 +110,55 @@
   :bind ("C-c f" . nt/find-file))
 
 
+;;; Evil
+
+(use-package evil
+  :ensure t
+  :demand t
+  :init
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump t)
+  :config
+  (evil-mode 1))
+
+(use-package evil-escape
+  :ensure t
+  :after evil
+  :demand t
+  :diminish
+  :config
+  (setq evil-escape-key-sequence "jk")
+  (evil-escape-mode 1))
+
+(use-package evil-surround
+  :ensure t
+  :after evil
+  :demand t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :demand t
+  :diminish evil-collection-unimpaired-mode
+  :config
+  (evil-collection-init))
+
+(defun nt/vterm-evil-insert (&rest _)
+  (when (derived-mode-p 'vterm-mode)
+    (evil-insert-state)))
+(dolist (cmd '(evil-window-left evil-window-right evil-window-up evil-window-down
+               evil-window-next evil-window-prev other-window
+               switch-to-buffer consult-buffer consult-buffer-other-window))
+  (advice-add cmd :after #'nt/vterm-evil-insert))
+
+
 ;;; Keys
 
-(global-set-key (kbd "s-u") #'revert-buffer-quick)
-(windmove-default-keybindings)
+(evil-define-key 'normal 'global "-" #'dired-jump)
+
 (autoload 'nt/revert-buffer "nt-revert")
 (global-set-key (kbd "s-u") #'nt/revert-buffer)
 
