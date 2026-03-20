@@ -53,7 +53,10 @@
 
 (column-number-mode)
 (setq-default display-line-numbers-width 3)
+(setq display-line-numbers-global-modes '(not vterm-mode Info-mode dired-mode))
 (global-display-line-numbers-mode)
+(dolist (hook '(Info-mode-hook dired-mode-hook))
+  (add-hook hook (lambda () (display-line-numbers-mode -1))))
 (setf (alist-get 'continuation fringe-indicator-alist) '(nil nil))
 (line-number-mode)
 (size-indication-mode)
