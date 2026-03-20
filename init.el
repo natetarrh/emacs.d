@@ -114,12 +114,36 @@
 ;;; Git
 
 (use-package magit-section
+  :ensure t
   :init
-  (setq magit-section-visibility-indicators nil))
+  (setq magit-section-visibility-indicators
+        '((?• . ?◦) ("…" . t))))
 
-(use-package magit)
+(use-package magit
+  :ensure t)
 
-;; This is intentionally not loaded.
-(setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
+
+;;; Claude
+
+(use-package vterm
+  :ensure t
+  :hook (vterm-mode . (lambda ()
+                        (display-line-numbers-mode -1)
+                        (set-window-fringes nil 0 0)
+                        (page-break-lines-mode -1))))
+
+(use-package claude-code
+  :ensure t
+  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+  :bind-keymap ("C-c c" . claude-code-command-map)
+  :diminish claude-code-mode
+  :config
+  (setq claude-code-terminal-backend 'vterm)
+  (setq claude-code-display-window-fn
+        (lambda (buffer)
+          (pop-to-buffer buffer '((display-buffer-in-direction)
+                                  (direction . right)
+                                  (window-width . 0.5)))))
+  (claude-code-mode))
 
 ;;; init.el ends here
