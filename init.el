@@ -69,6 +69,11 @@
 
 ;;; Completion: Vertico (UI) + fzf (matching) + Consult (commands)
 
+(use-package recentf
+  :demand t
+  :config
+  (recentf-mode))
+
 (use-package fzf-complete
   :demand t
   :config
