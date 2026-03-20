@@ -22,13 +22,16 @@
 ;;; Performance
 
 (setq read-process-output-max (* 1024 1024))
-(setq gc-cons-threshold (* 20 1024 1024))
-
-;; Typing latency tweaks
 (setq jit-lock-defer-time 0.05)
-(setq bidi-paragraph-direction 'left-to-right)
-(setq auto-window-vscroll nil)
-(setq inhibit-compacting-font-caches t)
+
+(defun nt/gc-disable ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun nt/gc-enable ()
+  (setq gc-cons-threshold 800000))
+
+(add-hook 'minibuffer-setup-hook #'nt/gc-disable)
+(add-hook 'minibuffer-exit-hook #'nt/gc-enable)
 
 
 ;;; Appearance
