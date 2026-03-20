@@ -155,6 +155,20 @@
   (advice-add cmd :after #'nt/vterm-evil-insert))
 
 
+;;; Dired
+
+(setq ls-lisp-use-insert-directory-program nil)
+(setq ls-lisp-dirs-first t)
+(setq ls-lisp-verbosity nil)
+(setq dired-listing-switches "-alB")
+(add-hook 'dired-mode-hook #'dired-omit-mode)
+
+(use-package dired-gitignore
+  :ensure t
+  :after dired
+  :config
+  (dired-gitignore-global-mode))
+
 ;;; Keys
 
 (evil-define-key 'normal 'global "-" #'dired-jump)
