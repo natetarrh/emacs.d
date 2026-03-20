@@ -37,7 +37,16 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
+(use-package page-break-lines
+  :ensure t
+  :demand t
+  :config
+  (global-page-break-lines-mode))
+
 (column-number-mode)
+(setq-default display-line-numbers-width 3)
+(global-display-line-numbers-mode)
+(setf (alist-get 'continuation fringe-indicator-alist) '(nil nil))
 (line-number-mode)
 (size-indication-mode)
 
