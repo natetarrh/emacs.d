@@ -88,8 +88,8 @@
 (use-package consult
   :ensure t
   :bind (("C-x b" . consult-buffer)
+         ("C-x 4 b" . consult-buffer-other-window)
          ("C-c b" . consult-buffer)
-         ("C-c s" . consult-ripgrep)
          ("C-c l" . consult-line))
   :config
   (setq consult-preview-key nil))
