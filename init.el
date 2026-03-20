@@ -62,6 +62,7 @@
 (size-indication-mode)
 
 (use-package modus-themes
+  :ensure t
   :demand t
   :config
   (modus-themes-load-theme 'modus-operandi-tinted))
