@@ -1,10 +1,30 @@
 ;;; init.el --- Emacs configuration -*- lexical-binding: t; -*-
 
+;;; Code:
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 (require 'use-package)
 (setq use-package-always-defer t)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+(setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
+
+(desktop-save-mode 1)
+
+
+;;; Performance
+
+(setq read-process-output-max (* 1024 1024))
+(setq gc-cons-threshold (* 20 1024 1024))
+
+;; Typing latency tweaks
+(setq jit-lock-defer-time 0.05)
+(setq bidi-paragraph-direction 'left-to-right)
+(setq auto-window-vscroll nil)
+(setq inhibit-compacting-font-caches t)
 
 
 ;;; Appearance
