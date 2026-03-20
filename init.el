@@ -101,6 +101,7 @@
 ;;; Keys
 
 (global-set-key (kbd "s-u") #'revert-buffer-quick)
+(windmove-default-keybindings)
 
 (use-package which-key
   :ensure t
