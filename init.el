@@ -48,6 +48,7 @@
   :ensure t
   :demand t
   :config
+  (add-to-list 'page-break-lines-modes 'emacs-news-view-mode)
   (global-page-break-lines-mode))
 
 (column-number-mode)
