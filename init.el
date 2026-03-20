@@ -124,10 +124,13 @@
   :ensure t
   :init
   (setq magit-section-visibility-indicators
-        '((?• . ?◦) ("…" . t))))
+	'(("…" . t) ("…" . t))))
 
 (use-package magit
   :ensure t)
+
+(autoload 'nt/magit-status "nt-magit")
+(global-set-key (kbd "C-x g") #'nt/magit-status)
 
 
 ;;; Claude
