@@ -82,7 +82,7 @@
   :config
   (recentf-mode))
 
-(use-package fzf-complete
+(use-package nt-fzf-complete
   :ensure nil
   :demand t
   :config
