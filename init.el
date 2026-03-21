@@ -42,22 +42,24 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+(setf (alist-get 'continuation fringe-indicator-alist) '(nil nil))
+
+(column-number-mode)
+(line-number-mode)
+(size-indication-mode)
+
+(setq-default display-line-numbers-width 3)
+(setq display-line-numbers-global-modes '(not vterm-mode Info-mode dired-mode))
+(dolist (hook '(Info-mode-hook dired-mode-hook))
+  (add-hook hook (lambda () (display-line-numbers-mode -1))))
+(global-display-line-numbers-mode)
 
 (use-package page-break-lines
   :demand t
+  :diminish
   :config
   (add-to-list 'page-break-lines-modes 'emacs-news-view-mode)
   (global-page-break-lines-mode))
-
-(column-number-mode)
-(setq-default display-line-numbers-width 3)
-(setq display-line-numbers-global-modes '(not vterm-mode Info-mode dired-mode))
-(global-display-line-numbers-mode)
-(dolist (hook '(Info-mode-hook dired-mode-hook))
-  (add-hook hook (lambda () (display-line-numbers-mode -1))))
-(setf (alist-get 'continuation fringe-indicator-alist) '(nil nil))
-(line-number-mode)
-(size-indication-mode)
 
 (use-package modus-themes
   :demand t
