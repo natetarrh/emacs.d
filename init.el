@@ -253,6 +253,10 @@
   :diminish
   :config
   (setq claude-code-terminal-backend 'vterm)
+  (setq claude-code-display-window-fn
+        (lambda (buffer)
+          (display-buffer buffer '((display-buffer-in-direction)
+                                   (direction . right)))))
   (claude-code-mode))
 
 ;;; init.el ends here
