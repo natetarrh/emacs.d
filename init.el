@@ -155,6 +155,15 @@
   (advice-add cmd :after #'nt/vterm-evil-insert))
 
 
+;;; Tree-sitter
+
+(use-package treesit-auto
+  :demand t
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+
 ;;; Projects
 
 (use-package projectile
