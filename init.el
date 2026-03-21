@@ -200,6 +200,7 @@
 
 ;;; Git
 (use-package git-gutter
+  :diminish
   :init
   (global-git-gutter-mode t)
   (setq git-gutter:added-sign "+"
