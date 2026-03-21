@@ -2,21 +2,20 @@
 
 ;;; Code:
 
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (require 'use-package)
 (setq use-package-always-defer t)
+(setq use-package-always-ensure t)
+(require 'use-package-chords)
 
 (use-package diminish
-  :ensure t
   :demand t)
-
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-
-(setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
-
-(desktop-save-mode 1)
+(key-chord-mode 1)
 
 
 ;;; Performance
@@ -45,7 +44,6 @@
 (tool-bar-mode -1)
 
 (use-package page-break-lines
-  :ensure t
   :demand t
   :config
   (add-to-list 'page-break-lines-modes 'emacs-news-view-mode)
@@ -62,7 +60,6 @@
 (size-indication-mode)
 
 (use-package modus-themes
-  :ensure t
   :demand t
   :config
   (modus-themes-load-theme 'modus-operandi-tinted))
@@ -73,7 +70,6 @@
 ;;; Environment
 
 (use-package exec-path-from-shell
-  :ensure t
   :demand t
   :config
   (exec-path-from-shell-initialize))
@@ -87,18 +83,17 @@
   (recentf-mode))
 
 (use-package fzf-complete
+  :ensure nil
   :demand t
   :config
   (setq completion-styles '(fzf basic)))
 
 (use-package vertico
-  :ensure t
   :demand t
   :config
   (vertico-mode))
 
 (use-package consult
-  :ensure t
   :bind (("C-x b" . consult-buffer)
          ("C-x 4 b" . consult-buffer-other-window)
          ("C-c b" . consult-buffer)
@@ -107,13 +102,13 @@
   (setq consult-preview-key nil))
 
 (use-package nt-files
+  :ensure nil
   :bind ("C-c f" . nt/find-file))
 
 
 ;;; Evil
 
 (use-package evil
-  :ensure t
   :demand t
   :init
   (setq evil-want-keybinding nil)
@@ -123,7 +118,6 @@
   (evil-mode 1))
 
 (use-package evil-escape
-  :ensure t
   :after evil
   :demand t
   :diminish
@@ -132,14 +126,12 @@
   (evil-escape-mode 1))
 
 (use-package evil-surround
-  :ensure t
   :after evil
   :demand t
   :config
   (global-evil-surround-mode 1))
 
 (use-package evil-collection
-  :ensure t
   :after evil
   :demand t
   :diminish evil-collection-unimpaired-mode
@@ -158,7 +150,6 @@
 ;;; Projects
 
 (use-package projectile
-  :ensure t
   :diminish
   :bind-keymap ("C-c p" . projectile-command-map)
   :config
@@ -179,7 +170,6 @@
 (add-hook 'dired-mode-hook #'dired-omit-mode)
 
 (use-package dired-gitignore
-  :ensure t
   :after dired
   :config
   (dired-gitignore-global-mode))
@@ -192,7 +182,6 @@
 (global-set-key (kbd "s-u") #'nt/revert-buffer)
 
 (use-package which-key
-  :ensure t
   :defer 5
   :diminish
   :config
@@ -202,13 +191,11 @@
 ;;; Git
 
 (use-package magit-section
-  :ensure t
   :init
   (setq magit-section-visibility-indicators
 	'(("…" . t) ("…" . t))))
 
-(use-package magit
-  :ensure t)
+(use-package magit)
 
 (autoload 'nt/magit-status "nt-magit")
 (global-set-key (kbd "C-x g") #'nt/magit-status)
@@ -218,7 +205,6 @@
 ;;; Claude
 
 (use-package vterm
-  :ensure t
   :hook (vterm-mode . (lambda ()
                         (display-line-numbers-mode -1)
                         (setq-local truncate-lines t)
@@ -230,7 +216,6 @@
               ("M-:" . eval-expression)))
 
 (use-package claude-code
-  :ensure t
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
   :bind-keymap ("C-c c" . claude-code-command-map)
   :diminish
