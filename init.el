@@ -9,10 +9,8 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (require 'use-package)
-(require 'use-package-chords)
 (setq use-package-always-defer t)
 (setq use-package-always-ensure t)
-(key-chord-mode 1)
 
 (use-package diminish
   :demand t)
@@ -58,8 +56,8 @@
   :demand t
   :diminish
   :config
-  (add-to-list 'page-break-lines-modes 'emacs-news-view-mode)
-  (global-page-break-lines-mode))
+  (add-hook 'emacs-news-view-mode-hook #'page-break-lines-mode)
+  (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
 
 (use-package modus-themes
   :demand t
@@ -177,7 +175,7 @@
 
 (use-package nt-projectile
   :ensure nil
-  :chords ("gp" . nt/projectile-switch-project))
+  :bind ("C-c p p" . nt/projectile-switch-project))
 
 
 ;;; Dired
