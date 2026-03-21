@@ -197,6 +197,7 @@
 
 (autoload 'nt/magit-status "nt-magit")
 (global-set-key (kbd "C-x g") #'nt/magit-status)
+(global-set-key (kbd "C-c g") #'nt/magit-status)
 
 
 ;;; Claude
