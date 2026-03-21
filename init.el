@@ -139,6 +139,9 @@
   :demand t
   :diminish evil-collection-unimpaired-mode
   :config
+  (defun nt/disable-evil-escape-in-magit ()
+    (setq-local evil-escape-inhibit t))
+  (add-hook 'magit-mode-hook #'nt/disable-evil-escape-in-magit)
   (evil-collection-init))
 
 (defun nt/vterm-evil-insert (&rest _)
