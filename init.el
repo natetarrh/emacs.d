@@ -245,7 +245,12 @@
                         (set-window-fringes nil 0 0)
                         (page-break-lines-mode -1)))
   :bind (:map vterm-mode-map
-              ("M-:" . eval-expression)))
+              ("M-:" . eval-expression))
+  :config
+  (evil-define-key 'insert vterm-mode-map
+    (kbd "C-w") evil-window-map
+    (kbd "<escape>") #'vterm-send-escape
+    (kbd "C-g") (lambda () (interactive) (vterm-send-key "g" nil nil t))))
 
 (use-package claude-code
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
