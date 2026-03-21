@@ -229,9 +229,7 @@
   (setq magit-section-visibility-indicators
 	'(("…" . t) ("…" . t))))
 
-(use-package magit
-  :config
-  (setq magit-refresh-verbose t))
+(use-package magit)
 
 (autoload 'nt/magit-status "nt-magit")
 (global-set-key (kbd "C-x g") #'nt/magit-status)
