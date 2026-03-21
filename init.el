@@ -180,7 +180,10 @@
 
 ;;; Keys
 
-(evil-define-key 'normal 'global "-" #'dired-jump)
+(evil-define-key 'normal 'global
+  "-" #'dired-jump
+  (kbd "C-p") #'consult-buffer
+  (kbd "C-f") #'nt/find-file)
 
 (autoload 'nt/revert-buffer "nt-revert")
 (global-set-key (kbd "s-u") #'nt/revert-buffer)
