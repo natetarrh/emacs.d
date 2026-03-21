@@ -9,14 +9,13 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (require 'use-package)
+(require 'use-package-chords)
 (setq use-package-always-defer t)
 (setq use-package-always-ensure t)
-(require 'use-package-chords)
+(key-chord-mode 1)
 
 (use-package diminish
   :demand t)
-(key-chord-mode 1)
-
 
 
 ;;; Performance
