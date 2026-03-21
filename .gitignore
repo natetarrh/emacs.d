@@ -4,8 +4,9 @@
 *.elc
 eln-cache/
 
-# Backup and auto-save
+# Backup, auto-save, and patch rejects
 *~
+*.rej
 \#*\#
 .#*
 auto-save-list/
