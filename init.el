@@ -165,6 +165,10 @@
   (setq projectile-project-search-path '("~/Developer/"))
   (projectile-mode))
 
+(use-package nt-projectile
+  :ensure nil
+  :chords ("gp" . nt/projectile-switch-project))
+
 
 ;;; Dired
 
