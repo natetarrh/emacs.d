@@ -155,6 +155,17 @@
   (advice-add cmd :after #'nt/vterm-evil-insert))
 
 
+;;; Projects
+
+(use-package projectile
+  :ensure t
+  :diminish
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config
+  (setq projectile-project-search-path '("~/Developer/"))
+  (projectile-mode))
+
+
 ;;; Dired
 
 (setq ls-lisp-use-insert-directory-program nil)

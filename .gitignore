@@ -46,6 +46,7 @@ server/
 
 # projectile
 .projectile
+projectile-bookmarks.eld
 
 # Directory configuration
 .dir-locals.el
