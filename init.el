@@ -18,6 +18,7 @@
 (key-chord-mode 1)
 
 
+
 ;;; Performance
 
 (setq read-process-output-max (* 1024 1024))
@@ -32,7 +33,7 @@
 (add-hook 'minibuffer-setup-hook #'nt/gc-disable)
 (add-hook 'minibuffer-exit-hook #'nt/gc-enable)
 
-
+
 ;;; Appearance
 
 (setq inhibit-splash-screen t
@@ -66,15 +67,15 @@
 
 (set-face-attribute 'default nil :family "Input Mono Narrow" :height 140)
 
-
-;;; Environment
+
+;;; Env
 
 (use-package exec-path-from-shell
   :demand t
   :config
   (exec-path-from-shell-initialize))
 
-
+
 ;;; Completion: Vertico (UI) + fzf (matching) + Consult (commands)
 
 (use-package recentf
@@ -105,7 +106,7 @@
   :ensure nil
   :bind ("C-c f" . nt/find-file))
 
-
+
 ;;; Evil
 
 (use-package evil
@@ -146,7 +147,7 @@
                switch-to-buffer consult-buffer consult-buffer-other-window))
   (advice-add cmd :after #'nt/vterm-evil-insert))
 
-
+
 ;;; Projects
 
 (use-package projectile
@@ -160,7 +161,7 @@
   :ensure nil
   :chords ("gp" . nt/projectile-switch-project))
 
-
+
 ;;; Dired
 
 (setq ls-lisp-use-insert-directory-program nil)
@@ -174,6 +175,7 @@
   :config
   (dired-gitignore-global-mode))
 
+
 ;;; Keys
 
 (evil-define-key 'normal 'global "-" #'dired-jump)
@@ -187,7 +189,7 @@
   :config
   (which-key-mode))
 
-
+
 ;;; Git
 
 (use-package magit-section
@@ -201,7 +203,7 @@
 (global-set-key (kbd "C-x g") #'nt/magit-status)
 (global-set-key (kbd "C-c g") #'nt/magit-status)
 
-
+
 ;;; Claude
 
 (use-package vterm
