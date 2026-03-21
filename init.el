@@ -91,6 +91,9 @@
 (use-package vertico
   :demand t
   :config
+  (setq vertico-buffer-display-action
+	'(display-buffer-in-side-window (side . bottom) (window-height . 0.4)))
+  (vertico-buffer-mode)
   (vertico-mode))
 
 (use-package consult
