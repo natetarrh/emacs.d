@@ -193,6 +193,16 @@
 
 
 ;;; Git
+(use-package git-gutter
+  :init
+  (global-git-gutter-mode t)
+  (setq git-gutter:added-sign "+"
+	git-gutter:modified-sign "~"
+	git-gutter:deleted-sign "-"
+	git-gutter:hide-gutter t)
+  (evil-define-key 'normal 'global
+    "]c" #'git-gutter:next-hunk
+    "[c" #'git-gutter:previous-hunk))
 
 (use-package magit-section
   :init
