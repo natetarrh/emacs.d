@@ -72,6 +72,8 @@
 (use-package exec-path-from-shell
   :demand t
   :config
+  (dolist (var '("EDITOR" "VISUAL"))
+    (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
 
