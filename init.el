@@ -178,7 +178,8 @@
   :diminish
   :bind-keymap ("C-c p" . projectile-command-map)
   :config
-  (setq projectile-project-search-path '("~/Developer/"))
+  (setq projectile-project-search-path '("~/Developer/")
+	projectile-dynamic-mode-line nil)
   (projectile-mode))
 
 (use-package nt-projectile
