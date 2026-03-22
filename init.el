@@ -248,7 +248,11 @@
   (setq magit-section-visibility-indicators
 	'(("…" . t) ("…" . t))))
 
-(use-package magit)
+(use-package magit
+  :config
+  (evil-define-key '(normal visual) magit-mode-map
+    (kbd "M-j") #'magit-section-forward-sibling
+    (kbd "M-k") #'magit-section-backward-sibling))
 
 (autoload 'nt/magit-status "nt-magit")
 (global-set-key (kbd "C-x g") #'nt/magit-status)
