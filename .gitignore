@@ -61,6 +61,9 @@ network-security.data
 # tramp
 tramp
 
+# tree-sitter grammars
+tree-sitter/
+
 # Local
 .custom.el
 transient/
