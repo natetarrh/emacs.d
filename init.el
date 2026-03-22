@@ -147,6 +147,10 @@
   :diminish
   :config
   (setq evil-escape-key-sequence "jk")
+  (defun nt/evil-escape-insert-no-indent (fn)
+    (let ((electric-indent-inhibit t))
+      (funcall fn)))
+  (advice-add 'evil-escape--insert-func :around #'nt/evil-escape-insert-no-indent)
   (evil-escape-mode 1))
 
 (use-package evil-surround
