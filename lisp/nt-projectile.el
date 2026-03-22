@@ -9,7 +9,15 @@
 Keys are project roots (strings), so use `lax-plist-put' and
 `lax-plist-get'.")
 
-(defvar nt/projectile-switch-fallback 'projectile-find-file)
+(defun nt/projectile-open-project-buffer ()
+  "Open an empty buffer named after the project in the project root."
+  (let* ((root (projectile-project-root))
+         (name (projectile-project-name))
+         (buf (get-buffer-create (format "*%s*" name))))
+    (switch-to-buffer buf)
+    (setq default-directory root)))
+
+(defvar nt/projectile-switch-fallback #'nt/projectile-open-project-buffer)
 
 ;;;###autoload
 (defun nt/projectile-switch-project (&optional arg)

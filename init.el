@@ -123,9 +123,6 @@
   (setq consult-preview-key nil)
   (setq completion-in-region-function #'consult-completion-in-region))
 
-(use-package nt-files
-  :bind ("C-c f" . nt/find-file))
-
 
 ;;; Evil
 
@@ -196,7 +193,10 @@
   (projectile-mode))
 
 (use-package nt-projectile
-  :bind ("C-c p p" . nt/projectile-switch-project))
+  :after projectile
+  :bind (:map projectile-command-map
+              ("p" . nt/projectile-switch-project)
+              ("P" . nt/projectile-save-thing)))
 
 
 ;;; Dired
@@ -217,8 +217,8 @@
 
 (evil-define-key 'normal 'global
   "-" #'dired-jump
-  (kbd "C-p") #'consult-buffer
-  (kbd "C-f") #'nt/find-file)
+  (kbd "C-p") #'projectile-switch-to-buffer
+  (kbd "C-f") #'projectile-find-file)
 
 (autoload 'nt/revert-buffer "nt-revert")
 (global-set-key (kbd "s-u") #'nt/revert-buffer)
