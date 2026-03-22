@@ -2,17 +2,13 @@
 
 ;;; Code:
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (require 'use-package)
 (setq use-package-always-defer t)
-(setq use-package-always-ensure t)
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(use-package diminish
-  :demand t)
 ;; This is intentionally not loaded.
 (setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
 
