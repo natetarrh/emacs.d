@@ -167,8 +167,9 @@
 (use-package treesit-auto
   :demand t
   :config
+  (setq treesit-auto-langs '(bash dockerfile go json org python ruby sql toml yaml))
   (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  (setq major-mode-remap-alist (treesit-auto--build-major-mode-remap-alist)))
 
 
 ;;; Projects
