@@ -80,7 +80,22 @@
   (exec-path-from-shell-initialize))
 
 
-;;; Completion: Vertico (UI) + fzf (matching) + Consult (commands)
+;;; Completion: Corfu (in-buffer) + Vertico (minibuffer) + fzf (matching) + Consult (commands)
+
+(use-package corfu
+  :demand t
+  :config
+  (setq corfu-cycle t)
+  (evil-define-key 'insert corfu-map
+    (kbd "C-n") #'corfu-next
+    (kbd "C-p") #'corfu-previous)
+  (global-corfu-mode))
+
+(use-package cape
+  :demand t
+  :config
+  (add-hook 'completion-at-point-functions
+            (cape-capf-properties #'cape-dabbrev :annotation-function #'ignore)))
 
 (use-package recentf
   :demand t
@@ -207,6 +222,8 @@
 
 (autoload 'nt/revert-buffer "nt-revert")
 (global-set-key (kbd "s-u") #'nt/revert-buffer)
+
+(evil-define-key 'insert 'global (kbd "C-n") #'completion-at-point)
 
 (use-package which-key
   :defer 5
