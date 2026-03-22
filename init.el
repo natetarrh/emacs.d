@@ -51,7 +51,7 @@
 (size-indication-mode)
 
 (setq-default display-line-numbers-width 3)
-(setq display-line-numbers-global-modes '(not vterm-mode Info-mode dired-mode))
+(setq display-line-numbers-global-modes '(not vterm-mode Info-mode dired-mode eshell-mode))
 (dolist (hook '(Info-mode-hook dired-mode-hook))
   (add-hook hook (lambda () (display-line-numbers-mode -1))))
 (global-display-line-numbers-mode)
