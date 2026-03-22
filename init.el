@@ -3,7 +3,6 @@
 ;;; Code:
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -14,6 +13,8 @@
 
 (use-package diminish
   :demand t)
+;; This is intentionally not loaded.
+(setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
 
 
 ;;; Performance
@@ -21,6 +22,7 @@
 (setq read-process-output-max (* 1024 1024))
 (setq jit-lock-defer-time 0.05)
 
+;; https://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
 (defun nt/gc-disable ()
   (setq gc-cons-threshold most-positive-fixnum))
 
