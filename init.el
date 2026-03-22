@@ -227,12 +227,6 @@
 
 (evil-define-key 'insert 'global (kbd "C-n") #'completion-at-point)
 
-(use-package which-key
-  :defer 5
-  :diminish
-  :config
-  (which-key-mode))
-
 
 ;;; Git
 (use-package git-gutter
