@@ -220,16 +220,18 @@
 
 ;;; Git
 (use-package git-gutter
+  :demand t
   :diminish
   :init
-  (global-git-gutter-mode t)
   (setq git-gutter:added-sign "+"
 	git-gutter:modified-sign "~"
 	git-gutter:deleted-sign "-"
 	git-gutter:hide-gutter t)
   (evil-define-key 'normal 'global
     "]c" #'git-gutter:next-hunk
-    "[c" #'git-gutter:previous-hunk))
+    "[c" #'git-gutter:previous-hunk)
+  :config
+  (global-git-gutter-mode t))
 
 (use-package magit-section
   :init
