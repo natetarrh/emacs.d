@@ -226,6 +226,8 @@
 
 (autoload 'nt/revert-buffer "nt-revert")
 (global-set-key (kbd "s-u") #'nt/revert-buffer)
+(global-set-key (kbd "C-c r") #'compile)
+(add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
 (evil-define-key 'insert 'global (kbd "C-n") #'completion-at-point)
 
