@@ -7,6 +7,7 @@
 
 (require 'use-package)
 (setq use-package-always-defer t)
+
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; This is intentionally not loaded.
@@ -29,8 +30,9 @@
 
 ;; Format Emacs profiler flamegraphs for flamegraph.pl
 (use-package nt-profiler
-    :ensure nil
+  
     :commands (nt/profiler-export-folded-stacks))
+
 
 ;;; Appearance
 
@@ -86,7 +88,7 @@
   (recentf-mode))
 
 (use-package nt-fzf-complete
-  :ensure nil
+
   :demand t
   :config
   (setq completion-styles '(fzf basic)))
@@ -109,7 +111,7 @@
   (setq completion-in-region-function #'consult-completion-in-region))
 
 (use-package nt-files
-  :ensure nil
+
   :bind ("C-c f" . nt/find-file))
 
 
@@ -178,7 +180,7 @@
   (projectile-mode))
 
 (use-package nt-projectile
-  :ensure nil
+
   :bind ("C-c p p" . nt/projectile-switch-project))
 
 
