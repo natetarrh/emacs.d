@@ -30,7 +30,6 @@
 
 ;; Format Emacs profiler flamegraphs for flamegraph.pl
 (use-package nt-profiler
-  
     :commands (nt/profiler-export-folded-stacks))
 
 
@@ -103,7 +102,6 @@
   (recentf-mode))
 
 (use-package nt-fzf-complete
-
   :demand t
   :config
   (setq completion-styles '(fzf basic)))
@@ -126,7 +124,6 @@
   (setq completion-in-region-function #'consult-completion-in-region))
 
 (use-package nt-files
-
   :bind ("C-c f" . nt/find-file))
 
 
@@ -199,7 +196,6 @@
   (projectile-mode))
 
 (use-package nt-projectile
-
   :bind ("C-c p p" . nt/projectile-switch-project))
 
 
