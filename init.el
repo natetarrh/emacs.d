@@ -108,7 +108,8 @@
          ("C-c b" . consult-buffer)
          ("C-c l" . consult-line))
   :config
-  (setq consult-preview-key nil))
+  (setq consult-preview-key nil)
+  (setq completion-in-region-function #'consult-completion-in-region))
 
 (use-package nt-files
   :ensure nil
