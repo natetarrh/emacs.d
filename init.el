@@ -30,6 +30,10 @@
 (add-hook 'minibuffer-setup-hook #'nt/gc-disable)
 (add-hook 'minibuffer-exit-hook #'nt/gc-enable)
 
+;; Format Emacs profiler flamegraphs for flamegraph.pl
+(use-package nt-profiler
+    :ensure nil
+    :commands (nt/profiler-export-folded-stacks))
 
 ;;; Appearance
 
