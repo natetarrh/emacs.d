@@ -85,10 +85,11 @@
   :demand t
   :config
   (setq corfu-cycle t)
-  (evil-define-key 'insert corfu-map
-    (kbd "C-n") #'corfu-next
-    (kbd "C-p") #'corfu-previous)
-  (global-corfu-mode))
+  (global-corfu-mode)
+  (with-eval-after-load 'evil
+    (evil-define-key 'insert corfu-map
+      (kbd "C-n") #'corfu-next
+      (kbd "C-p") #'corfu-previous)))
 
 (use-package cape
   :demand t
