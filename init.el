@@ -29,10 +29,6 @@
 (add-hook 'minibuffer-setup-hook #'nt/gc-disable)
 (add-hook 'minibuffer-exit-hook #'nt/gc-enable)
 
-;; Format Emacs profiler flamegraphs for flamegraph.pl
-(use-package nt-profiler
-    :commands (nt/profiler-export-folded-stacks))
-
 
 ;;; Appearance
 
@@ -118,8 +114,7 @@
          ("C-c b" . consult-buffer)
          ("C-c l" . consult-line))
   :config
-  (setq consult-preview-key nil)
-  (setq completion-in-region-function #'consult-completion-in-region))
+  (setq consult-preview-key nil))
 
 
 ;;; Evil
@@ -189,8 +184,36 @@
   :config
   (setq projectile-project-search-path '("~/Developer/")
 	projectile-dynamic-mode-line nil)
-  (projectile-mode))
+  (projectile-mode)
+  (define-key projectile-command-map "p" #'nt/projectile-switch-project)
+  (define-key projectile-command-map "P" #'nt/projectile-save-thing)
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal 'global
+      (kbd "C-p") #'projectile-switch-to-buffer
+      (kbd "C-f") #'projectile-find-file)))
 
+
+;;; Dired
+
+(setq ls-lisp-use-insert-directory-program nil)
+(setq ls-lisp-dirs-first t)
+(setq ls-lisp-verbosity nil)
+(setq dired-listing-switches "-alB")
+(add-hook 'dired-mode-hook #'dired-omit-mode)
+
+(with-eval-after-load 'evil
+  (evil-define-key 'normal 'global
+    "-" #'dired-jump))
+
+(use-package dired-gitignore
+  :after dired
+  :config
+  (dired-gitignore-global-mode))
+
+
+;;; Keys
+
+(global-set-key (kbd "s-u") #'nt/revert-buffer)
 (global-set-key (kbd "C-c r") #'compile)
 (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
@@ -204,11 +227,12 @@
 	git-gutter:modified-sign "~"
 	git-gutter:deleted-sign "-"
 	git-gutter:hide-gutter t)
-  (evil-define-key 'normal 'global
-    "]c" #'git-gutter:next-hunk
-    "[c" #'git-gutter:previous-hunk)
   :config
-  (global-git-gutter-mode t))
+  (global-git-gutter-mode t)
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal 'global
+      "]c" #'git-gutter:next-hunk
+      "[c" #'git-gutter:previous-hunk)))
 
 (use-package magit-section
   :init
@@ -217,9 +241,10 @@
 
 (use-package magit
   :config
-  (evil-define-key '(normal visual) magit-mode-map
-    (kbd "M-j") #'magit-section-forward-sibling
-    (kbd "M-k") #'magit-section-backward-sibling))
+  (with-eval-after-load 'evil
+    (evil-define-key '(normal visual) magit-mode-map
+      (kbd "M-j") #'magit-section-forward-sibling
+      (kbd "M-k") #'magit-section-backward-sibling)))
 
 (global-set-key (kbd "C-x g") #'nt/magit-status)
 (global-set-key (kbd "C-c g") #'nt/magit-status)
@@ -238,10 +263,11 @@
   :bind (:map vterm-mode-map
               ("M-:" . eval-expression))
   :config
-  (evil-define-key 'insert vterm-mode-map
-    (kbd "C-w") evil-window-map
-    (kbd "<escape>") #'vterm-send-escape
-    (kbd "C-g") (lambda () (interactive) (vterm-send-key "g" nil nil t))))
+  (with-eval-after-load 'evil
+    (evil-define-key 'insert vterm-mode-map
+      (kbd "C-w") evil-window-map
+      (kbd "<escape>") #'vterm-send-escape
+      (kbd "C-g") (lambda () (interactive) (vterm-send-key "g" nil nil t)))))
 
 (use-package claude-code
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
