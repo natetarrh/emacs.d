@@ -88,6 +88,7 @@
   (setq corfu-cycle t)
   (global-corfu-mode)
   (with-eval-after-load 'evil
+    (evil-define-key 'insert 'global (kbd "C-n") #'completion-at-point)
     (evil-define-key 'insert corfu-map
       (kbd "C-n") #'corfu-next
       (kbd "C-p") #'corfu-previous)))
@@ -192,8 +193,6 @@
 
 (global-set-key (kbd "C-c r") #'compile)
 (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
-
-(evil-define-key 'insert 'global (kbd "C-n") #'completion-at-point)
 
 
 ;;; Git
