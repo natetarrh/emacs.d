@@ -52,11 +52,8 @@
 (global-display-line-numbers-mode)
 
 (use-package page-break-lines
-  :demand t
   :diminish
-  :config
-  (add-hook 'emacs-news-view-mode-hook #'page-break-lines-mode)
-  (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
+  :hook ((emacs-news-view-mode emacs-lisp-mode) . page-break-lines-mode))
 
 (use-package modus-themes
   :demand t
@@ -90,7 +87,7 @@
       (kbd "C-p") #'corfu-previous)))
 
 (use-package cape
-  :demand t
+  :after corfu
   :config
   (add-hook 'completion-at-point-functions
             (cape-capf-properties #'cape-dabbrev :annotation-function #'ignore)))
@@ -220,15 +217,14 @@
 
 ;;; Git
 (use-package git-gutter
-  :demand t
   :diminish
+  :hook ((prog-mode text-mode) . git-gutter-mode)
   :init
   (setq git-gutter:added-sign "+"
 	git-gutter:modified-sign "~"
 	git-gutter:deleted-sign "-"
 	git-gutter:hide-gutter t)
   :config
-  (global-git-gutter-mode t)
   (with-eval-after-load 'evil
     (evil-define-key 'normal 'global
       "]c" #'git-gutter:next-hunk
