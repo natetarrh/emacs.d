@@ -11,6 +11,7 @@ Replaces spaces and semicolons so flamegraph.pl can parse the line."
                (t (replace-regexp-in-string "[ \t\n]+" "_" (format "%s" fn))))))
     (replace-regexp-in-string "[; ]" "_" name)))
 
+;;;###autoload
 (defun nt/profiler-export-folded-stacks (filename)
   "Export the current CPU profile as folded stacks to FILENAME.
 The output is compatible with Brendan Gregg's flamegraph.pl and inferno."

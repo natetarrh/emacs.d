@@ -32,6 +32,7 @@ With prefix argument ARG, prompt for what to save instead."
   (let ((projectile-switch-project-action #'nt/projectile-maybe-restore-thing))
     (projectile-switch-project)))
 
+;;;###autoload
 (defun nt/projectile-save-thing (thing)
   "Save thing for current project.
 

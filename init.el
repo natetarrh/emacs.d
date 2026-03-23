@@ -9,6 +9,7 @@
 (setq use-package-always-defer t)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(load "nt-emacs-autoloads" t)
 
 ;; This is intentionally not loaded.
 (setq custom-file (expand-file-name ".custom.el" user-emacs-directory))
@@ -96,11 +97,6 @@
   :config
   (add-hook 'completion-at-point-functions
             (cape-capf-properties #'cape-dabbrev :annotation-function #'ignore)))
-
-(use-package recentf
-  :demand t
-  :config
-  (recentf-mode))
 
 (use-package nt-fzf-complete
   :demand t
@@ -193,36 +189,7 @@
 	projectile-dynamic-mode-line nil)
   (projectile-mode))
 
-(use-package nt-projectile
-  :after projectile
-  :bind (:map projectile-command-map
-              ("p" . nt/projectile-switch-project)
-              ("P" . nt/projectile-save-thing)))
-
-
-;;; Dired
-
-(setq ls-lisp-use-insert-directory-program nil)
-(setq ls-lisp-dirs-first t)
-(setq ls-lisp-verbosity nil)
-(setq dired-listing-switches "-alB")
-(add-hook 'dired-mode-hook #'dired-omit-mode)
-
-(use-package dired-gitignore
-  :after dired
-  :config
-  (dired-gitignore-global-mode))
-
-
-;;; Keys
-
-(evil-define-key 'normal 'global
-  "-" #'dired-jump
-  (kbd "C-p") #'projectile-switch-to-buffer
-  (kbd "C-f") #'projectile-find-file)
-
-(autoload 'nt/revert-buffer "nt-revert")
-(global-set-key (kbd "s-u") #'nt/revert-buffer)
+(revert-buffer)
 (global-set-key (kbd "C-c r") #'compile)
 (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
@@ -255,7 +222,6 @@
     (kbd "M-j") #'magit-section-forward-sibling
     (kbd "M-k") #'magit-section-backward-sibling))
 
-(autoload 'nt/magit-status "nt-magit")
 (global-set-key (kbd "C-x g") #'nt/magit-status)
 (global-set-key (kbd "C-c g") #'nt/magit-status)
 
