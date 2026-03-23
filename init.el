@@ -183,13 +183,13 @@
 
 (use-package projectile
   :diminish
-  :bind-keymap ("C-c p" . projectile-command-map)
+  :bind-keymap (("C-c p" . projectile-command-map)
+                ("s-p" . projectile-command-map))
   :config
   (setq projectile-project-search-path '("~/Developer/")
 	projectile-dynamic-mode-line nil)
   (projectile-mode))
 
-(revert-buffer)
 (global-set-key (kbd "C-c r") #'compile)
 (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
