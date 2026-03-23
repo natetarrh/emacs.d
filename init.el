@@ -24,7 +24,7 @@
   (setq gc-cons-threshold most-positive-fixnum))
 
 (defun nt/gc-enable ()
-  (setq gc-cons-threshold 800000))
+  (setq gc-cons-threshold (* 4 1024 1024))))
 
 (add-hook 'minibuffer-setup-hook #'nt/gc-disable)
 (add-hook 'minibuffer-exit-hook #'nt/gc-enable)
