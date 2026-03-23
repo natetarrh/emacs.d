@@ -56,6 +56,41 @@ Thing is a character representing
 
 (autoload 'nt/revert-buffer "nt-revert" "\
 Revert buffer, skipping confirmation when content matches the file on disk." t)
+
+
+;;; Generated autoloads from nt-shell.el
+
+(autoload 'nt/zsh-vterm "nt-shell" "\
+Open a vterm buffer in DIRECTORY.
+
+If a terminal for DIRECTORY already exists, switch to that
+buffer.  If the current buffer is already a terminal for
+DIRECTORY, create an additional terminal.
+
+By default, DIRECTORY is `default-directory'.
+
+With a \\[universal-argument] prefix argument, set DIRECTORY to
+the home directory.
+
+With a 0 prefix argument, select from existing terminal
+directories.
+
+With any other prefix argument, prompt for directory.
+
+If NAME is non-nil, use *NAME* for the buffer name instead of
+*zsh: DIRECTORY*.
+
+(fn &optional DIRECTORY NAME)" t)
+(autoload 'nt/zsh-toggle-vterm-home "nt-shell" "\
+Toggle a vterm buffer for the home directory.
+With OTHER-WINDOW prefix, display in other window.
+
+(fn &optional OTHER-WINDOW)" t)
+(autoload 'nt/zsh-vterm-other-window "nt-shell" "\
+Open a vterm buffer in DIRECTORY in another window.
+
+(fn &optional DIRECTORY)" t)
+(register-definition-prefixes "nt-shell" '("nt/zsh-vterm-"))
 
 ;;; End of scraped data
 
