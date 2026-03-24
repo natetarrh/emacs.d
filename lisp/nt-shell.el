@@ -38,15 +38,22 @@ If NAME is non-nil, use *NAME* for the buffer name instead of
                full-name)))))
 
 ;;;###autoload
-(defun nt/zsh-toggle-vterm-home (&optional other-window)
-  "Toggle a vterm buffer for the home directory.
+(defun nt/zsh-toggle-vterm-project (&optional other-window)
+  "Toggle a vterm buffer for the current project root.
+Falls back to `default-directory' if not in a project.
 With OTHER-WINDOW prefix, display in other window."
   (interactive "P")
-  (if (string= "*zsh*" (buffer-name))
-      (bury-buffer)
-    (let ((display-buffer-overriding-action
-           (and other-window '(nil (inhibit-same-window . t)))))
-      (nt/zsh-vterm "~/" "zsh"))))
+  (let* ((pr (project-current))
+         (dir (if pr
+                  (project-root pr)
+                default-directory)))
+    (if (string= (buffer-name)
+                 (concat "*zsh: " (abbreviate-file-name
+                                   (expand-file-name dir)) "*"))
+        (bury-buffer)
+      (let ((display-buffer-overriding-action
+             (and other-window '(nil (inhibit-same-window . t)))))
+        (nt/zsh-vterm dir)))))
 
 ;;;###autoload
 (defun nt/zsh-vterm-other-window (&optional directory)

@@ -81,8 +81,9 @@ If NAME is non-nil, use *NAME* for the buffer name instead of
 *zsh: DIRECTORY*.
 
 (fn &optional DIRECTORY NAME)" t)
-(autoload 'nt/zsh-toggle-vterm-home "nt-shell" "\
-Toggle a vterm buffer for the home directory.
+(autoload 'nt/zsh-toggle-vterm-project "nt-shell" "\
+Toggle a vterm buffer for the current project root.
+Falls back to `default-directory' if not in a project.
 With OTHER-WINDOW prefix, display in other window.
 
 (fn &optional OTHER-WINDOW)" t)

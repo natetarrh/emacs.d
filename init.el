@@ -214,7 +214,7 @@
 (global-set-key (kbd "C-c r") #'compile)
 (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
-(global-set-key (kbd "C-c z") #'nt/zsh-toggle-vterm-home)
+(global-set-key (kbd "C-c z") #'nt/zsh-toggle-vterm-project)
 (define-key ctl-x-4-map "z" #'nt/zsh-vterm-other-window)
 
 
