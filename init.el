@@ -88,6 +88,7 @@
 
 (use-package cape
   :after corfu
+  :demand t
   :config
   (add-hook 'completion-at-point-functions
             (cape-capf-properties #'cape-dabbrev :annotation-function #'ignore)))
@@ -178,16 +179,17 @@
   :diminish
   :bind-keymap (("C-c p" . projectile-command-map)
                 ("s-p" . projectile-command-map))
+  :init
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal 'global
+      (kbd "C-p") #'projectile-switch-to-buffer
+      (kbd "C-f") #'projectile-find-file))
   :config
   (setq projectile-project-search-path '("~/Developer/")
 	projectile-dynamic-mode-line nil)
   (projectile-mode)
   (define-key projectile-command-map "p" #'nt/projectile-switch-project)
-  (define-key projectile-command-map "P" #'nt/projectile-save-thing)
-  (with-eval-after-load 'evil
-    (evil-define-key 'normal 'global
-      (kbd "C-p") #'projectile-switch-to-buffer
-      (kbd "C-f") #'projectile-find-file)))
+  (define-key projectile-command-map "P" #'nt/projectile-save-thing))
 
 
 ;;; Dired
@@ -233,13 +235,10 @@
       "]c" #'git-gutter:next-hunk
       "[c" #'git-gutter:previous-hunk)))
 
-(use-package magit-section
-  :init
-  (setq magit-section-visibility-indicators
-	'(("…" . t) ("…" . t))))
-
 (use-package magit
   :config
+  (setq magit-section-visibility-indicators
+	'(("…" . t) ("…" . t)))
   (with-eval-after-load 'evil
     (evil-define-key '(normal visual) magit-mode-map
       (kbd "M-j") #'magit-section-forward-sibling
